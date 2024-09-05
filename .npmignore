@@ -1,0 +1,11 @@
+/src
+/node_modules
+/misc
+/.git
+/.github
+/tests
+
+tsconfig.json
+.DS_Store
+
+*.config.*

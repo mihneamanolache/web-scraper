@@ -1,0 +1,57 @@
+{
+    "name": "@mihnea.dev/webscraper",
+    "version": "1.0.1",
+    "description": "A robust web scraping library using Playwright for Node.js. This library provides an easy-to-use API for automating web interactions, extracting data, and handling various web scraping tasks efficiently.",
+    "main": "dist/index.js",
+    "type": "module",
+    "files": [
+        "dist"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/mihneamanolache/web-scraper.git"
+    },
+    "exports": {
+        "./package.json": "./package.json",
+        ".": {
+            "require": "./dist/index.cjs",
+            "import": "./dist/index.mjs"
+        }
+    },
+    "author": "Mihnea Octavian Manolache <mihnea.dev@gmail.com> (https://github.com/mihneamanolache/)",
+    "types": "./dist/index.d.ts",
+    "license": "SSPL-1.0",
+    "scripts": {
+        "build": "rm -rf ./dist && tsup src/index.ts --format cjs,esm --dts --clean",
+        "version:bump": "node misc/version.mjs"
+    },
+    "devDependencies": {
+        "@eslint-community/eslint-plugin-eslint-comments": "^4.4.0",
+        "@eslint/js": "^9.9.1",
+        "@types/node": "^22.5.1",
+        "eslint": "^9.9.1",
+        "eslint-config-prettier": "^9.1.0",
+        "globals": "^15.9.0",
+        "tsup": "^8.2.4",
+        "typescript": "^5.5.4",
+        "typescript-eslint": "^8.3.0"
+    },
+    "dependencies": {
+        "dotenv": "^16.4.5",
+        "playwright": "1.44"
+    },
+    "directories": {
+        "test": "tests"
+    },
+    "bugs": {
+        "url": "https://github.com/mihneamanolache/web-scraper/issues"
+    },
+    "entrypoint": "dist/Scraper.js",
+    "keywords": [
+        "web-scraper",
+        "scraper",
+        "scraping",
+        "playwright",
+        "crawler"
+    ]
+}
