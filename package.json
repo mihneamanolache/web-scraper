@@ -1,6 +1,6 @@
 {
     "name": "@mihnea.dev/webscraper",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "A robust web scraping library using Playwright for Node.js. This library provides an easy-to-use API for automating web interactions, extracting data, and handling various web scraping tasks efficiently.",
     "main": "dist/index.js",
     "type": "module",
