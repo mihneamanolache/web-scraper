@@ -15,6 +15,12 @@ export enum ProxyType {
 
 export type BrowserTypes = "webkit" | "firefox" | "chromium";
 
+export enum BrowserType {
+    Webkit   = "webkit",
+    Firefox  = "firefox",
+    Chromium = "chromium",
+}
+
 export interface IScraperConfig {
     /**
      * URL to scrape.

@@ -28,7 +28,7 @@ The scraper can be configured with various options to customize its behavior. He
 const config: IScraperConfig = {
     url:            "https://example.com",
     proxy_type:     ProxyType.Datacenter,
-    browser_type:   "chromium",
+    browser_type:   BrowserType.Chromium,
     headless:       "true",
     block_ads:      "true",
     stealth:        "true",
@@ -53,15 +53,15 @@ Replace [TYPE] with the proxy type, such as DATACENTER or MOBILE.
 To use the web scraper, you can create a new instance of the `Scraper` class and call the `scrape` method:
 
 ```typescript
-import Scraper, { type IScraperConfig, ProxyType } from "@mihnea.dev/webscraper";
+import Scraper, { type IScraperConfig, ProxyType, BrowserType } from "@mihnea.dev/webscraper";
 
 const config: IScraperConfig = {
     url:            "https://api.ipify.org",
     proxy_type:     ProxyType.None,
-    browser_type:   "chromium",
-    headless:       "true",
-    block_ads:      "true",
-    stealth:        "true",
+    browser_type:   BrowserType.Chromium,
+    headless:       true,
+    block_ads:      true,
+    stealth:        true,
     timeout:        30000,
     wait_until:     "networkidle",
 };
@@ -73,6 +73,15 @@ scraper.run().then((result) => {
 }).catch((error: Error) => {
     console.error("Scraping failed:", error.message);
 });
+```
+
+**IMPORTANT**
+Currently, the Scraper class is designed to integrate with Browserless. To use the scraper with Browserless, you need to: 
+- set `BROWSER_WS_ENDPOINT` environment variable to the Browserless WebSocket URL (defaults to `ws://localhost:3000`) 
+- run the Browserless service locally or use the Browserless API. To run it locally, you can use the following Docker command:
+
+```bash
+docker run -p 3000:3000 ghcr.io/browserless/multi:latest
 ```
 
 ## Contributing
