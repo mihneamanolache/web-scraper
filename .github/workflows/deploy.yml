@@ -21,9 +21,6 @@ jobs:
       - name: Install Dependencies
         run: yarn install
 
-      - name: Bump Version
-        run: yarn version --patch
-
       - name: Compile
         run: yarn build
       
