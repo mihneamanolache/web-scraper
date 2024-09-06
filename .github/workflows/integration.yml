@@ -23,11 +23,11 @@ jobs:
 
       - name: Version Bump
         run: | 
-          yarn version --patch
           git config --local user.email "mihnea.dev@gmail.com"
           git config --local user.name "Mihnea Manolache"
           git fetch
           git checkout origin/$GITHUB_HEAD_REF
+          yarn version --patch
           git add .
           git commit -m "CI: Version bump"
           git push origin HEAD:$GITHUB_HEAD_REF
