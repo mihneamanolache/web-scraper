@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 18.x ]
+        node-version: [ 20.x ]
     steps:
       - uses: actions/checkout@v3
 
@@ -23,6 +23,7 @@ jobs:
 
       - name: Version Bump
         run: | 
+          yarn version --patch
           git config --local user.email "mihnea.dev@gmail.com"
           git config --local user.name "Mihnea Manolache"
           git fetch
