@@ -23,7 +23,6 @@ jobs:
 
       - name: Version Bump
         run: | 
-          yarn version:bump
           git config --local user.email "mihnea.dev@gmail.com"
           git config --local user.name "Mihnea Manolache"
           git fetch
