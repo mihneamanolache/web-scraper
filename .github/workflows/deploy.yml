@@ -23,6 +23,9 @@ jobs:
 
       - name: Compile
         run: yarn build
+
+      - name: Bump Version
+        run: yarn version --patch
       
       - name: Publish 
         run: npm publish 
