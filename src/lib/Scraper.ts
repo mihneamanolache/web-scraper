@@ -146,18 +146,19 @@ export default class Scraper {
      */
     private async cleanup(): Promise<void> {
         if ( this.page ) {
-            await this.page.unroute("**/*").catch((e: unknown): void => { console.error(e) });
-            await this.page.close().catch((e: unknown): void => { console.error(e) });
+            try {
+                await this.page.unroute("**/*");
+            } catch { /* ignore */ }
+            try {
+                await this.page.close();
+            } catch { /* ignore */ }
         }
-        if ( this.context ) {
-            await this.context.close().catch((e: unknown): void => { console.error(e) });
-        }
-        if ( this.browser ) {
-            if ( this.browser.isConnected() ) {
-                this.browser.removeAllListeners()
-                await this.browser.close().catch((e: unknown): void => { console.error(e) });
-            }
-        }
+        try {
+            await this.context?.close();
+        } catch { /* ignore */ }
+        try {
+            await this.browser?.close();
+        } catch { /* ignore */ }
     }
 
     /**
@@ -218,16 +219,10 @@ export default class Scraper {
                 status_code:    500,
             }
         } finally {
-            try { 
-                if ( this.page ) {
-                    this.page.off('crash', crash);
-                    this.page.off('close', close);
-                    this.page.off('dialog', dialog);
-                }
-                await this.cleanup();
-            } catch (e: unknown) {
-                console.error(e);
-            }
+            this.page?.off('crash', crash);
+            this.page?.off('close', close);
+            this.page?.off('dialog', dialog);
+            await this.cleanup();
         }
     }
 
