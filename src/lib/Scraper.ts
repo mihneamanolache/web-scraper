@@ -145,10 +145,19 @@ export default class Scraper {
      * This method ensures that all resources are properly released after the scraping operation.
      */
     private async cleanup(): Promise<void> {
-        await this.page?.unroute("**/*").catch((e: unknown): void => { console.error(e) });
-        await this.page?.close().catch((e: unknown): void => { console.error(e) });
-        await this.context?.close().catch((e: unknown): void => { console.error(e) });
-        await this.browser?.close().catch((e: unknown): void => { console.error(e) });
+        if ( this.page ) {
+            await this.page.unroute("**/*").catch((e: unknown): void => { console.error(e) });
+            await this.page.close().catch((e: unknown): void => { console.error(e) });
+        }
+        if ( this.context ) {
+            await this.context.close().catch((e: unknown): void => { console.error(e) });
+        }
+        if ( this.browser ) {
+            if ( this.browser.isConnected() ) {
+                this.browser.removeAllListeners()
+                await this.browser.close().catch((e: unknown): void => { console.error(e) });
+            }
+        }
     }
 
     /**
@@ -209,10 +218,16 @@ export default class Scraper {
                 status_code:    500,
             }
         } finally {
-            this.page?.off('crash', crash);
-            this.page?.off('close', close);
-            this.page?.off('dialog', dialog);
-            await this.cleanup();
+            try { 
+                if ( this.page ) {
+                    this.page.off('crash', crash);
+                    this.page.off('close', close);
+                    this.page.off('dialog', dialog);
+                }
+                await this.cleanup();
+            } catch (e: unknown) {
+                console.error(e);
+            }
         }
     }
 
